@@ -5,6 +5,15 @@ project.lock.json
 *.pyc
 nupkg/
 
+### DotnetCore ###
+# .NET Core build folders
+bin/
+obj/
+
+# Common node modules locations
+/node_modules
+/wwwroot/node_modules
+
 # Visual Studio Code
 .vscode/
 
