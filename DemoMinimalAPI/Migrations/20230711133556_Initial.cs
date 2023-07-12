@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DemoMinimalAPI.Migrationss
+namespace DemoMinimalAPI.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
