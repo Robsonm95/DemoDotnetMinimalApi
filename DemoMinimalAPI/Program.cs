@@ -64,7 +64,8 @@ fornecedor.MapPut("/{id}", async (
     Fornecedor fornecedor,
     MinimalContextDb context) =>
 {
-    var fornecedorSalvo = await context.Fornecedores.FindAsync(id);
+    var fornecedorSalvo = await context.Fornecedores.AsNoTracking<Fornecedor>()
+        .FirstOrDefaultAsync(f => f.Id == id);
     if(fornecedorSalvo == null)  return Results.NotFound();
 
     context.Fornecedores.Update(fornecedor);
@@ -76,6 +77,7 @@ fornecedor.MapPut("/{id}", async (
 })
     .Produces<Fornecedor>(StatusCodes.Status204NoContent)
     .Produces(StatusCodes.Status400BadRequest)
+    .Produces(StatusCodes.Status404NotFound)
     .WithName("PutFornecedor")
     .WithTags("Fornecedor");
 
@@ -93,8 +95,9 @@ fornecedor.MapDelete("/", async (
         ? Results.NoContent()
         : Results.BadRequest("Houve um problema ao remover o registro");
 })
-    .Produces<Fornecedor>(StatusCodes.Status400BadRequest)
-    .Produces<Fornecedor>(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status404NotFound)
+    
     .Produces(StatusCodes.Status400BadRequest)
     .WithName("DeleteFornecedor")
     .WithTags("Fornecedor");
